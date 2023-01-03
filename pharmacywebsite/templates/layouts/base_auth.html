@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  {% load static %}
+  <!-- bootstrap watch css -->
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+
+  <title>PHARMACY | {% block title %} {% endblock %}</title>
+
+  <!--custom css-->
+  {% block custom_css %}
+  {% endblock %}
+
+</head>
+
+<body>
+  <!--body content-->
+  {% block content %}
+  {% endblock %}
+
+  <!--custome js-->
+  {% block custom_js %}
+  {% endblock %}
+</body>
+
+</html>
