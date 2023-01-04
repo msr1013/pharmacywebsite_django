@@ -14,7 +14,7 @@ Register
     </div>
     <div class="card-body">
       <form action="{% url 'register' %}" method="post">
-        <!-- {% csrf_token %} -->
+        {% csrf_token %}
         <div class="form-group mb-2">
           <label for="username">Username</label>
           <input type="text" name="username" class="form-control">
@@ -29,6 +29,8 @@ Register
         </div>
         <input type="submit" class="btn btn-primary col-12" value="LOGIN">
       </form>
+      {% if email %}
+
     </div>
   </div>
 </div>
