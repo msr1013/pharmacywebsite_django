@@ -12,6 +12,7 @@ Register
     <div class="card-header">
       <h3>Register your account here</h3>
     </div>
+    {% include 'partials/_message.html' %}
     <div class="card-body">
       <form action="{% url 'register' %}" method="post">
         {% csrf_token %}
@@ -29,7 +30,7 @@ Register
         </div>
         <input type="submit" class="btn btn-primary col-12" value="LOGIN">
       </form>
-      {% if email %}
+
 
     </div>
   </div>
