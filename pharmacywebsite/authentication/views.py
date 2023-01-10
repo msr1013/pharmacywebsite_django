@@ -1,7 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import reverse, redirect, render
 from django.views import View
-from django.contrib.auth.models import User
 from django.contrib import auth
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 
 # Create your views here.
@@ -19,8 +20,21 @@ class LoginView(View):
             user = auth.authenticate(
                 username=req_username, password=req_password)
             auth.login(request, user)
-            return render(request, 'medicines/index.html')
+            return redirect('medicines')
         return redirect("login")
+
+
+# class LoginView(View):
+#     def get(self, request):
+#         form = AuthenticationForm()
+#         return render(request, 'authentication/login.html', {'form': form})
+
+#     def post(self, request):
+#         form = AuthenticationForm(request, request.POST)
+#         if form.is_valid():
+#             auth.login(request, form.get_user())
+#             return redirect(request, 'medicines/index.html')
+#         return redirect("login")
 
 
 class RegisterView(View):
