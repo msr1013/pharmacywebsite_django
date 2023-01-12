@@ -24,7 +24,31 @@ def category_create(request):
 
 @login_required(login_url='/authentication/login')
 def medicine_index(request):
-    return render(request, 'medicines/index.html')
+    data = Medicine.objects.all()
+    context = {"data": data}
+    return render(request, 'medicines/index.html', context)
+
+
+@login_required(login_url='/authentication/login')
+def medicine_edit(request, id):
+    data = Medicine.objects.get(id-id)
+    context = {"data": data}
+    return render(request, "medicines/edit_medicine.html", context)
+
+
+@login_required(login_url='/authentication/login')
+def medicine_show(request, id):
+    data = Medicine.objects.get(id=id)
+    context = {"data": data}
+    return render(request, "medicines/show_medicine.html", context)
+
+
+@login_required(login_url='/authentication/login')
+def medicine_delete(request, id):
+    data = Medicine.objects.get(id=id)
+    data.delete()
+    messages.success(request, 'Deleted successfully')
+    return render(request, "medicines/edit_medicines.html")
 
 
 @login_required(login_url='/authentication/login')
