@@ -1,0 +1,26 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}
+Medicine Show
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  {% include 'partials/_message.html' %}
+  <a href="{% url 'medicines' %}" class="btn btn-primary btn-sm mb-2">BACK</a>
+  <div class="card">
+    <div class="card-header">
+      <h3>Medicine - {{ data.name }} Detail</h3>
+    </div>
+    <div class="card-body">
+      <h5>Description</h5>
+      {{ data.description }}
+      <hr>
+      <h5>Expiry Date: {{ data.expiry_date }}</h5>
+      <h5>MG: {{ data.mg }}</h5>
+      <h5>Price: {{ data.price }}</h5>
+      <h5>Quantity: {{ data.quantity }}</h5>
+    </div>
+  </div>
+</div>
+{% endblock %}

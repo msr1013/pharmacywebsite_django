@@ -31,9 +31,25 @@ def medicine_index(request):
 
 @login_required(login_url='/authentication/login')
 def medicine_edit(request, id):
-    data = Medicine.objects.get(id-id)
+    data = Medicine.objects.get(id=id)
     context = {"data": data}
     return render(request, "medicines/edit_medicine.html", context)
+
+
+@login_required(login_url='/authentication/login')
+def medicine_update(request):
+    if request.method == "POST":
+        data = Medicine.objects.get(id=request.POST.get('id'))
+        data.name = request.POST.get('name')
+        data.description = request.POST.get('description')
+        data.expiry_date = request.POST.get('expiry_date')
+        data.mg = request.POST.get('mg')
+        data.price = request.POST.get('price')
+        data.quantity = request.POST.get('quantity')
+        data.save()
+        messages.success(request, 'Updated successfully')
+        return redirect('medicines')
+    return redirect('medicines')
 
 
 @login_required(login_url='/authentication/login')
@@ -48,7 +64,7 @@ def medicine_delete(request, id):
     data = Medicine.objects.get(id=id)
     data.delete()
     messages.success(request, 'Deleted successfully')
-    return render(request, "medicines/edit_medicines.html")
+    return redirect("medicines")
 
 
 @login_required(login_url='/authentication/login')
