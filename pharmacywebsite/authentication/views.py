@@ -4,6 +4,7 @@ from django.contrib import auth
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
+from django.core.mail import send_mail
 
 # Create your views here.
 
@@ -60,6 +61,13 @@ class RegisterView(View):
                 user.set_password(req_password)
                 user.is_active = False
                 user.save()
+
+                send_mail(
+                    'Account Creation',  # Subject
+                    'Congratulations! Your account has been created successfully.',  # message body
+                    'imsr1013@gmail.com',  # sender
+                    [user.email]  # receiver
+                )
                 return render(request, 'authentication/register.html')
             messages.error(request, 'Email already taken, try another')
             return render(request, 'authentication/register.html')
