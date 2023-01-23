@@ -62,12 +62,17 @@ class RegisterView(View):
                 user.is_active = False
                 user.save()
 
-                send_mail(
-                    'Account Creation',  # Subject
-                    'Congratulations! Your account has been created successfully.',  # message body
-                    'imsr1013@gmail.com',  # sender
-                    [user.email]  # receiver
-                )
+                try:
+
+                    send_mail(
+                        'Account Creation',  # Subject
+                        'Congratulations! Your account has been created successfully.',  # message body
+                        'imsr1013@gmail.com',  # sender
+                        [user.email]  # receiver
+                    )
+                except:
+                    messages.error(request, 'Email sending failed')
+                    return redirect("register")
                 return render(request, 'authentication/register.html')
             messages.error(request, 'Email already taken, try another')
             return render(request, 'authentication/register.html')
