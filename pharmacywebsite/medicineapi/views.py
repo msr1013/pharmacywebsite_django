@@ -98,3 +98,32 @@ class MedicineApiIdView(APIView):
         instance.delete()
         message = 'Medicine Deleted'
         return Response(getSuccessResponse(message, 200, message), status=status.HTTP_200_OK)
+
+    def put(self, request):
+        instance = self.get_medicine_object(id)
+
+        if not instance:
+            message = 'Not Found'
+            return Response(getErrorResponse(message, 404, message), status=status.HTTP_404_NOT_FOUND)
+
+        user = User.objects.get(username='a')
+        category = Category.objects.get(id=request.POST.get('category'))
+        req_data = {
+            "name": request.POST.get('name'),
+            "description": request.POST.get('description'),
+            "expiry_date": request.POST.get('expiry_date'),
+            "mg": request.POST.get('mg'),
+            "price": request.POST.get('price'),
+            "quantity": request.POST.get('quantity'),
+            "category": category.id,
+            "user": user.id,
+        }
+
+        serializer = MedicineSerializer(data=req_data)
+        if serializer.is_valid():
+            serializer.save()
+            message = 'Updated Successfully'
+            return Response(getSuccessResponse(serializer.data, 201, message), status=status.HTTP_CREATED_201)
+        else:
+            message = 'something went wrong'
+            return Response(getErrorResponse(serializer.data, 200, message), status=status.HTTP_200_OK)

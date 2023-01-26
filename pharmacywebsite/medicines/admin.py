@@ -4,6 +4,7 @@ from medicines.models import Medicine, Category
 
 # Register your models here.
 
+
 class MedicineAdmin(admin.ModelAdmin):
     list_display = ("name", "description", "expiry_date",
                     "mg", "price", "quantity", "category")

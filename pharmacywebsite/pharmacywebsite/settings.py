@@ -27,7 +27,7 @@ SECRET_KEY = '8w50u)g=%mru#1wn^#_q3a91z&o=iopr_&f!()ndrd4v&@kwel'
 DEBUG = True
 
 
-ALLOWED_HOSTS = ['kubernetes.docker.internal']
+ALLOWED_HOSTS = ['kubernetes.docker.internal', '127.0.0.1']
 
 
 # Application definition
